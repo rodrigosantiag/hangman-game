@@ -2,6 +2,19 @@
 
 require_relative 'ui'
 
+def pede_um_chute_valido(chutes, erros)
+  cabecalho_de_tentativas chutes, erros
+  loop do
+    chute = pede_um_chute
+
+    if chutes.include? chute
+      avisa_chute_repetido chute
+    else
+      return chute
+    end
+  end
+end
+
 def joga(nome)
   palavra_secreta = sorteia_palavra_secreta
 
@@ -10,12 +23,7 @@ def joga(nome)
   pontos_ate_agora = 0
 
   while erros < 5
-    chute = pede_um_chute chutes, erros
-
-    if chutes.include? chute
-      avisa_chute_repetido chute
-      next
-    end
+    chute = pede_um_chute_valido chutes, erros
 
     chutes << chute
 
@@ -44,9 +52,11 @@ def joga(nome)
   avisa_pontos_ganhos pontos_ate_agora
 end
 
-nome = da_boas_vindas
+def jogo_da_forca
+  nome = da_boas_vindas
 
-loop do
-  joga nome
-  break if nao_quer_jogar?
+  loop do
+    joga nome
+    break if nao_quer_jogar?
+  end
 end

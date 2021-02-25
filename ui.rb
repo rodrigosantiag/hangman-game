@@ -22,10 +22,13 @@ def nao_quer_jogar?
   nao_quero_jogar = quero_jogar.upcase == 'N'
 end
 
-def pede_um_chute(chutes, erros)
+def cabecalho_de_tentativas(chutes, erros)
   puts "\n\n\n\n"
   puts "Número de erros até agora: #{erros}"
   puts "Chutes até agora: #{chutes}"
+end
+
+def pede_um_chute
   puts 'Digite uma letra ou palavra:'
   chute = gets.strip
   puts "Você chutou #{chute}. Será que você acertou?"
