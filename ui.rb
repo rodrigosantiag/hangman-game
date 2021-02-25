@@ -17,13 +17,14 @@ def sorteia_palavra_secreta
 end
 
 def nao_quer_jogar?
-  puts "Deseja jogar novamente? (S/N)"
+  puts 'Deseja jogar novamente? (S/N)'
   quero_jogar = gets.strip
   nao_quero_jogar = quero_jogar.upcase == 'N'
 end
 
-def cabecalho_de_tentativas(chutes, erros)
+def cabecalho_de_tentativas(chutes, erros, mascara)
   puts "\n\n\n\n"
+  puts "Palavra secreta: #{mascara}"
   puts "Número de erros até agora: #{erros}"
   puts "Chutes até agora: #{chutes}"
 end
@@ -47,7 +48,7 @@ def avisa_acertou_letra(chute, quantidade_letras)
 end
 
 def avisa_errou_letra
-  puts "Poxa vida... essa letra não pertence à palavra secreta... :("
+  puts 'Poxa vida... essa letra não pertence à palavra secreta... :('
 end
 
 def avisa_acertou_palavra

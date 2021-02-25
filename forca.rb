@@ -2,8 +2,16 @@
 
 require_relative 'ui'
 
-def pede_um_chute_valido(chutes, erros)
-  cabecalho_de_tentativas chutes, erros
+def monta_mascara(palavra_secreta, chutes)
+  mascara = ''
+  palavra_secreta.chars.each do |letra|
+    mascara += chutes.include?(letra) ? letra : '_'
+  end
+  mascara
+end
+
+def pede_um_chute_valido(chutes, erros, mascara)
+  cabecalho_de_tentativas chutes, erros, mascara
   loop do
     chute = pede_um_chute
 
@@ -23,7 +31,8 @@ def joga(nome)
   pontos_ate_agora = 0
 
   while erros < 5
-    chute = pede_um_chute_valido chutes, erros
+    mascara = monta_mascara palavra_secreta, chutes
+    chute = pede_um_chute_valido chutes, erros, mascara
 
     chutes << chute
 
