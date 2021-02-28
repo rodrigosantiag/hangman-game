@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require_relative 'ui'
+require_relative 'rank'
 
 def monta_mascara(palavra_secreta, chutes)
   mascara = ''
@@ -21,6 +22,13 @@ def pede_um_chute_valido(chutes, erros, mascara)
       return chute
     end
   end
+end
+
+def pega_palavra_do_dicionario
+  arquivo = File.read 'dicionario.txt'
+  todas_as_palavras = arquivo.split("\n")
+  numero_palavra_secreta = rand(todas_as_palavras.size)
+  todas_as_palavras[numero_palavra_secreta].strip.downcase
 end
 
 def joga(nome)
@@ -46,7 +54,7 @@ def joga(nome)
         erros += 1
       end
     else
-      if chute.upcase == palavra_secreta.upcase
+      if chute == palavra_secreta
         avisa_acertou_palavra
         pontos_ate_agora += 100
         break
@@ -58,14 +66,20 @@ def joga(nome)
     end
   end
 
-  avisa_pontos_ganhos pontos_ate_agora
+  avisa_pontos_ganhos pontos_ate_agora, palavra_secreta
+  pontos_ate_agora
 end
 
 def jogo_da_forca
   nome = da_boas_vindas
+  pontos_totais = 0
+
+  exibe_campeao_atual(le_rank)
 
   loop do
-    joga nome
+    pontos_totais += joga(nome)
+    avisa_pontos_totais(pontos_totais)
+    salva_rank nome, pontos_totais if le_rank[1].to_i < pontos_totais
     break if nao_quer_jogar?
   end
 end

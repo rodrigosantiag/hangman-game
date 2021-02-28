@@ -11,7 +11,7 @@ end
 def sorteia_palavra_secreta
   puts "\n\n\n\n"
   puts 'Sorteando a palavra secrete...'
-  palavra_secreta = 'programador'
+  palavra_secreta = pega_palavra_do_dicionario
   puts "Palavra secreta selecionada! Ela contém #{palavra_secreta.size} letras."
   palavra_secreta
 end
@@ -31,7 +31,7 @@ end
 
 def pede_um_chute
   puts 'Digite uma letra ou palavra:'
-  chute = gets.strip
+  chute = gets.strip.downcase
   puts "Você chutou #{chute}. Será que você acertou?"
   chute
 end
@@ -59,6 +59,15 @@ def avisa_errou_palavra
   puts 'Você errou! Que pena :('
 end
 
-def avisa_pontos_ganhos(pontos)
+def avisa_pontos_ganhos(pontos, palavra_secreta)
   puts "Você ganhou #{pontos} pontos."
+  puts "A palavra era #{palavra_secreta}"
+end
+
+def avisa_pontos_totais(pontos)
+  puts "Você possui #{pontos} pontos."
+end
+
+def exibe_campeao_atual(campeao)
+  puts "O campeão atual é #{campeao[0]} com #{campeao[1]} pontos."
 end
