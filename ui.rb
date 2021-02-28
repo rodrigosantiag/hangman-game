@@ -1,16 +1,48 @@
 # frozen_string_literal: true
 
 def da_boas_vindas
-  puts 'Bem vindo ao jogo da forca!'
+  puts "/****************/"
+  puts "/ Jogo de Forca */"
+  puts "/****************/"
   puts 'Qual o seu nome?'
   nome = gets.strip
   puts "Olá #{nome}! Vamos começar o jogo!"
   nome
 end
 
+def desenha_forca(erros)
+  cabeca = "   "
+  corpo = " "
+  pernas = "   "
+  bracos = "   "
+  if erros >= 1
+    cabeca = "(_)"
+  end
+  if erros >= 2
+    bracos = " | "
+    corpo = "|"
+  end
+  if erros >= 3
+    bracos = "\\|/"
+  end
+  if erros >= 4
+    pernas = "/ \\"
+  end
+
+  puts "  _______       "
+  puts " |/      |      "
+  puts " |      #{cabeca}  "
+  puts " |      #{bracos}  "
+  puts " |       #{corpo}  "
+  puts " |      #{pernas}  "
+  puts " |              "
+  puts "_|___           "
+  puts
+end
+
 def sorteia_palavra_secreta
   puts "\n\n\n\n"
-  puts 'Sorteando a palavra secrete...'
+  puts 'Sorteando a palavra secreta...'
   palavra_secreta = pega_palavra_do_dicionario
   puts "Palavra secreta selecionada! Ela contém #{palavra_secreta.size} letras."
   palavra_secreta
@@ -24,6 +56,7 @@ end
 
 def cabecalho_de_tentativas(chutes, erros, mascara)
   puts "\n\n\n\n"
+  desenha_forca erros
   puts "Palavra secreta: #{mascara}"
   puts "Número de erros até agora: #{erros}"
   puts "Chutes até agora: #{chutes}"
@@ -52,7 +85,20 @@ def avisa_errou_letra
 end
 
 def avisa_acertou_palavra
-  puts 'Acertou! Parabéns!'
+  puts "\nParabéns, você ganhou!"
+  puts
+
+  puts "       ___________      "
+  puts "      '._==_==_=_.'     "
+  puts "      .-\\:      /-.    "
+  puts "     | (|:.     |) |    "
+  puts "      '-|:.     |-'     "
+  puts "        \\::.    /      "
+  puts "         '::. .'        "
+  puts "           ) (          "
+  puts "         _.' '._        "
+  puts "        '-------'       "
+  puts
 end
 
 def avisa_errou_palavra
